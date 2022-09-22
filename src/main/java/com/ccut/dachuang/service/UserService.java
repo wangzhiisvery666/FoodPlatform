@@ -6,6 +6,9 @@ import com.ccut.dachuang.model.VO.RegisterVo;
 import com.ccut.dachuang.model.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
 * @author o'k
 * @description 针对表【user】的数据库操作Service
@@ -17,5 +20,7 @@ public interface UserService extends IService<User> {
 
     CommonResponse<String>  getVerificationCode(String username,String password, String phoneNumber);
 
-    CommonResponse<CompleteLoginVo>  login(String username,String password);
+    CommonResponse<CompleteLoginVo>  login(String username, String password, HttpServletRequest session);
+
+    CommonResponse<Boolean>  logOut(HttpServletRequest session,String username);
 }

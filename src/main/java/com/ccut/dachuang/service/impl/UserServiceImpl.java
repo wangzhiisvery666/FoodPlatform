@@ -20,7 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -98,7 +99,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 登陆方法
      */
     @Override
-    public CommonResponse<CompleteLoginVo> login(String username,String password) {
+    public CommonResponse<CompleteLoginVo> login(String username,String password, HttpServletRequest session) {
+
 
       if (StringUtils.isEmpty(username)){
           throw new CustomizeException(ErrorEnum.USERNAME_IS_EMPTY);
@@ -107,8 +109,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
       if (StringUtils.isEmpty(password)){
           throw new CustomizeException(ErrorEnum.PASSWORD_IS_EMPTY);
       }
-
-
+      
           // TODO 此处注意 要加上md5
         String pw = CommonUtils.md5(password);
 
@@ -127,7 +128,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         completeLoginVo.setName(user.getUsername());
         completeLoginVo.setAvatar(user.getAvatar());
 
+        session.getSession().setAttribute(user.getUsername(),completeLoginVo);
+        log.info("==============Session中{}",session.getSession().getAttribute(user.getUsername()));
+        log.info("============欢迎: {} 的登陆==========",user.getUsername());
       return new CommonResponse<>("登陆成功",completeLoginVo,"200");
+    }
+
+    /**
+     * 用户退出登录
+     */
+    @Override
+    public CommonResponse<Boolean> logOut(HttpServletRequest session,String username) {
+        session.getSession().removeAttribute(username);
+
+        return new CommonResponse<>("退出成功",true,"200");
     }
 
 

@@ -2,7 +2,11 @@ package com.ccut.dachuang.utils;
 
 import com.ccut.dachuang.model.pojo.User;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
@@ -50,4 +54,6 @@ public class CommonUtils {
         }
        return  stringBuilder.toString();
     }
+
+
 }
