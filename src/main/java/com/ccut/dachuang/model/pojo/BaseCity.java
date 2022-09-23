@@ -1,6 +1,5 @@
 package com.ccut.dachuang.model.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -9,21 +8,21 @@ import lombok.Data;
 
 /**
  * 
- * @TableName menu
+ * @TableName base_city
  */
-@TableName(value ="menu")
+@TableName(value ="base_city")
 @Data
-public class Menu implements Serializable {
+public class BaseCity implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
+    @TableId
     private Integer id;
 
     /**
      * 
      */
-    private Integer numbering;
+    private String code;
 
     /**
      * 
@@ -33,7 +32,7 @@ public class Menu implements Serializable {
     /**
      * 
      */
-    private Integer parentId;
+    private String provincecode;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -49,11 +48,11 @@ public class Menu implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Menu other = (Menu) that;
+        BaseCity other = (BaseCity) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getNumbering() == null ? other.getNumbering() == null : this.getNumbering().equals(other.getNumbering()))
+            && (this.getCode() == null ? other.getCode() == null : this.getCode().equals(other.getCode()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()));
+            && (this.getProvincecode() == null ? other.getProvincecode() == null : this.getProvincecode().equals(other.getProvincecode()));
     }
 
     @Override
@@ -61,9 +60,9 @@ public class Menu implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getNumbering() == null) ? 0 : getNumbering().hashCode());
+        result = prime * result + ((getCode() == null) ? 0 : getCode().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
+        result = prime * result + ((getProvincecode() == null) ? 0 : getProvincecode().hashCode());
         return result;
     }
 
@@ -74,9 +73,9 @@ public class Menu implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", numbering=").append(numbering);
+        sb.append(", code=").append(code);
         sb.append(", name=").append(name);
-        sb.append(", parentId=").append(parentId);
+        sb.append(", provincecode=").append(provincecode);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -28,7 +28,6 @@ public class RegisterController {
             @ApiImplicitParam(name = "user",value ="Register",required = true)
     )
     @ApiResponses({
-
             @ApiResponse(code = 200, message = "success"),
             @ApiResponse(code = 100, message = "参数为空"),
             @ApiResponse(code = 101, message = "用户名长度小于4"),
@@ -37,7 +36,6 @@ public class RegisterController {
             @ApiResponse(code = 104, message = "密码长度小于6"),
             @ApiResponse(code = 105, message = "用户名包含敏感词"),
             @ApiResponse(code = 106, message = "数据库插入失败"),
-
     })
     public CommonResponse<Boolean> register(@RequestBody RegisterVo user){
         return userService.addUser(user);
@@ -58,7 +56,7 @@ public class RegisterController {
             @ApiResponse(code = 106, message = "数据库插入失败"),
 
     })
-    public CommonResponse<String> getVerificationCode(@Param("username") String username,@Param("password") String password ,@Param("phoneNumber") String phoneNumber ){
+    public CommonResponse<String> getVerificationCode( String username,String password , String phoneNumber ){
 
         return userService.getVerificationCode(username,password,phoneNumber);
     }

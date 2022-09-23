@@ -28,6 +28,6 @@ public class LunBoController {
     @GetMapping("/getUrl")
     public CommonResponse<List<String>> getUrl(){
         List<String> strings = lunBoService.getUrl();
-        return  new CommonResponse<>("success",strings,"200");
+        return  new CommonResponse<>("success", "200", strings);
     }
 }
